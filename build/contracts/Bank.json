@@ -258,14 +258,14 @@
   "filename": "C:\\Users\\Jagpreet\\Desktop\\embarkpractice\\projectName\\.embark\\contracts\\Bank.sol",
   "originalFilename": "contracts\\Bank.sol",
   "path": "C:\\Users\\Jagpreet\\Desktop\\embarkpractice\\projectName\\contracts\\Bank.sol",
-  "gas": 857636,
+  "gas": 939701,
   "gasPrice": "20000000000",
   "type": "file",
   "deploy": true,
   "_gasLimit": 6000000,
   "error": false,
-  "deploymentAccount": "0x347e22Eb2F696964A0552592065e2D5D73c12f11",
+  "deploymentAccount": "0xebB62AEAA84d6628960402751f40106888702D3B",
   "realArgs": [],
-  "deployedAddress": "0xc14cE41ad183DC9fbeA04eD5C089Af8914714D84",
-  "transactionHash": "0xab110ab1901f77e117d52a440ed9a9c63dc4d5eba81cdc4f4f69a577939d9656"
+  "deployedAddress": "0x4D6ed31A48d93B5dFdc03C7f6e0839C5d5E8925B",
+  "transactionHash": "0x585cd85705bb922e13a3336ddffbe19b98505d07762cf987a05ec7237ab2e4e8"
 }

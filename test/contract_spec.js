@@ -24,7 +24,7 @@ config({
 contract("Bank", function () {
   this.timeout(0);
 
-  it("Escrow was deployed", async function () {
+  it("Bank was deployed", async function () {
     let address=Bank.options.address
     
     assert.ok(address)
@@ -34,7 +34,7 @@ contract("Bank", function () {
   it("Open account", async function () {
     await Bank.methods.openAccount("aaa",25,"bbb","ddd").send({from:accounts[1],value:500000000});
     let result =  await Bank.methods.customerlist(0).call({from:accounts[1]})
-    console.log(result)
+    
     assert.equal(result.name,"aaa")
     
   });
@@ -44,9 +44,11 @@ contract("Bank", function () {
     try{
     await Bank.methods.openAccount("aaa",25,"bbb","ddd").send({from:accounts[2],value:50000})
     }
-    catch(e)
+    catch(error)
     {
-      console.log(e)
+      let errormessage=error.message;
+      assert.ok(errormessage.includes("insufficient amount"))
+
       
     }
 
@@ -57,10 +59,10 @@ contract("Bank", function () {
   it("Withdrawal", async function() {
     await Bank.methods.openAccount("aaa",25,"bbb","ddd").send({from:accounts[1],value:80000000000});
     let bal= await Bank.methods.callBalance(accounts[1]).call()
-    console.log("Before",bal)
+    
     await Bank.methods. withdraw(500000).send({from:accounts[1]})
     let balance= await Bank.methods.callBalance(accounts[1]).call()
-    console.log("The mapping balance is",balance)
+   
     assert.equal(balance,79999500000)
   });
   it("Withdrawal should not work", async function() {
@@ -68,9 +70,12 @@ contract("Bank", function () {
     
     await Bank.methods.withdraw(90000000000).send({from:accounts[1]})
     }
-    catch(e)
+    catch(error)
     {
-      console.log(e)
+      let errormessage=error.message;
+      assert.ok(errormessage.includes("insufficient balance"))
+
+     
     }
     
     
@@ -93,9 +98,11 @@ contract("Bank", function () {
     await Bank.methods.transferto(89999500000,accounts[2]).send({from:accounts[1]})
     }
 
-    catch(e)
+    catch(error)
     {
-      console.log(e)
+      let errormessage=error.message;
+      assert.ok(errormessage.includes("insufficient balance"))
+
     }
   
 
@@ -113,7 +120,7 @@ contract("Bank", function () {
     console.log("The mapping balance is",balance)
      assert.equal(balance, 80600000000)
   });
-  it("Bankbalancebymanager only",async function(){
+  it("Bankbalance bymanager only",async function(){
     let balance= await Bank.methods.checkbalanceofbank().call({from:accounts[0],})
     console.log("The mapping balance is",balance)
     assert.equal(balance,261049500000)
@@ -123,9 +130,10 @@ contract("Bank", function () {
     try{
     let balance= await Bank.methods.checkbalanceofbank().call({from:accounts[1],})
     }
-    catch(e)
+    catch(error)
     {
-      console.log(e)
+      let errormessage=error.message;
+      assert.ok(errormessage.includes("you are not the manager"))
     }
   });
 
