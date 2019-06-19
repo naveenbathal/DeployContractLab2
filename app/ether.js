@@ -1,13 +1,16 @@
-const ethers = require('ethers');
-const aa=require('../build/contracts/Bank.json')
-require('dotenv').config();
-const pk=process.env.privateKey
-let provider = ethers.getDefaultProvider("rinkeby");
-let wallet = new ethers.Wallet(pk,provider)
-let bytecode=aa.code
-let abi=aa.abiDefinition
+const eth = require('ethers');
 
-let factory = new ethers.ContractFactory(abi, bytecode, wallet);
+const x=require('../build/contracts/Bank.json')
+
+require('dotenv').config();
+
+const pri=process.env.privateKey
+let provider = eth.getDefaultProvider("rinkeby");
+let wallet = new eth.Wallet(pri,provider)
+let bytecode=x.code
+let abi=x.abiDefinition
+
+let factory = new eth.ContractFactory(abi, bytecode, wallet);
 async function deploythecontract()
 {
     let contract = await factory.deploy()
